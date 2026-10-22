@@ -77,8 +77,8 @@ function start(){try{audio=audio||(()=>{try{return new(window.AudioContext||wind
 function updateUI(){$('hpText').textContent=Math.ceil(hp)+' / '+maxHp;$('hpBar').style.width=clamp(hp/maxHp*100,0,100)+'%';$('xpText').textContent=xp+' / '+xpNeed;$('xpBar').style.width=clamp(xp/xpNeed*100,0,100)+'%';$('level').textContent=String(Math.max(1,Math.floor((atk-20)/4)+1)).padStart(2,'0');$('atk').textContent=atk;$('relics').textContent=relics;$('kills').textContent=kills;$('bossName').textContent=boss?boss.name:'AUCUN SIGNAL';$('bossHpText').textContent=boss?Math.ceil(boss.hp)+' / '+boss.max:'—';$('bossBar').style.width=boss?clamp(boss.hp/boss.max*100,0,100)+'%':'0%'}
 function burst(x,y,color,n=8){for(let i=0;i<n;i++)particles.push({x,y,vx:rand(-150,150),vy:rand(-210,80),life:rand(.2,.65),max:.65,color,size:rand(2,5)})}
 function gainXP(n){xp+=n;while(xp>=xpNeed){xp-=xpNeed;xpNeed=Math.floor(xpNeed*1.35+9);atk+=4;maxHp+=10;hp=Math.min(maxHp,hp+24);sound(500,.15,'triangle',.05,500);log('NIVEAU SUPÉRIEUR — attaque +4, intégrité restaurée.')}updateUI()}
-function attack(){if(state!=='play'||paused||attackT>0)return;attackT=.22;sound(260,.12,'sawtooth',.025,380);let range=player.face>0?player.x+player.w+48:player.x-48;
-for(const e of [...enemies])if(e.alive&&Math.abs((e.x+e.w/2)-range)<55&&Math.abs((e.y+e.h/2)-(player.y+player.h/2))<58){e.hp-=atk;e.flash=.12;burst(e.x+e.w/2,e.y+e.h/2,C.cream,7);shake=3;if(e.hp<=0){e.alive=false;kills++;gainXP(8);loot.push({x:e.x,y:e.y,type:Math.random()<.3?'shard':'relic',phase:0});sound(120,.12,'square',.04,-60)}}if(boss&&Math.abs((player.x+player.w/2)-(boss.x+boss.w/2))<100&&Math.abs(player.y-boss.y)<90){boss.hp-=atk;boss.flash=.14;burst(boss.x+boss.w/2,boss.y+20,C.cream,12);shake=5;if(boss.hp<=0){burst(boss.x+boss.w/2,boss.y+20,C.red,50);sound(90,.8,'sawtooth',.07,-65);boss=null;kills++;gainXP(35);log('LE VEILLEUR EST TOMBÉ. Les archives sont libres.');exitX=player.x+210}}updateUI()}
+function attack(){if(state!=='play'||paused||attackT>0)return;attackT=.22;sound(260,.12,'sawtooth',.025,380);let range=player.face>0?player.x+player.w+25:player.x-25;
+for(const e of [...enemies])if(e.alive&&Math.abs((e.x+e.w/2)-range)<34&&Math.abs((e.y+e.h/2)-(player.y+player.h*.55))<35){e.hp-=atk;e.flash=.12;burst(e.x+e.w/2,e.y+e.h/2,C.cream,7);shake=3;if(e.hp<=0){e.alive=false;kills++;gainXP(8);loot.push({x:e.x,y:e.y,type:Math.random()<.3?'shard':'relic',phase:0});sound(120,.12,'square',.04,-60)}}if(boss&&Math.abs((player.x+player.w/2)-(boss.x+boss.w/2))<72&&Math.abs((player.y+player.h*.55)-(boss.y+boss.h*.55))<58){boss.hp-=atk;boss.flash=.14;burst(boss.x+boss.w/2,boss.y+20,C.cream,12);shake=5;if(boss.hp<=0){burst(boss.x+boss.w/2,boss.y+20,C.red,50);sound(90,.8,'sawtooth',.07,-65);boss=null;kills++;gainXP(35);log('LE VEILLEUR EST TOMBÉ. Les archives sont libres.');exitX=player.x+210}}updateUI()}
 function dash(){if(state!=='play'||paused||dashCD>0)return;dashT=.18;dashCD=.8;inv=.35;player.vx=player.face*520;burst(player.x+12,player.y+20,C.silver,9);sound(170,.12,'triangle',.035,400)}
 function hurt(n){if(inv>0||state!=='play')return;hp-=n;inv=.8;shake=8;burst(player.x+12,player.y+20,C.red,12);sound(90,.25,'sawtooth',.05,-40);log('Impact reçu : −'+n+' intégrité.');if(hp<=0){hp=0;state='dead';end(false)}updateUI()}
 function end(win){state=win?'win':'dead';$('overlay').style.display='flex';$('overlay').innerHTML='<div class="ovinner"><div class="eyebrow">'+(win?'ARCHIVES RESTAURÉES':'SIGNAL PERDU')+'</div><h1>'+(win?'ÉCLIPSE':'RUN TERMINÉE')+'</h1><div class="subtitle">'+(win?'LE SOLEIL SE SOUVIENT':'LE NÉANT VOUS ATTEND')+'</div><p>Acte atteint : '+act+'<br>Éliminations : '+kills+' · Reliques : '+relics+'<br>Chaque fin est un nouveau commencement.</p><button id="again" class="btn primary">RECOMMENCER ↗</button></div>';$('again').onclick=start}
@@ -88,13 +88,13 @@ let move=0;if(keys.left||keys.ArrowLeft||keys.a)move--;if(keys.right||keys.Arrow
 if((keys.jump||keys[' ']||keys.ArrowUp||keys.w)&&player.ground){player.vy=-440;player.ground=false;keys.jump=false;keys[' ']=false;sound(300,.08,'triangle',.02,180)}
 if(dashT>0)player.vx=player.face*520;
 player.x=clamp(player.x+player.vx*dt,0,worldW-player.w);player.vy+=1050*dt;let oldY=player.y;player.y+=player.vy*dt;player.ground=false;
-for(const p of platforms)if(player.x+player.w>p.x&&player.x<p.x+p.w&&oldY+player.h<=p.y+3&&player.y+player.h>=p.y&&player.vy>=0){player.y=p.y-player.h;player.vy=0;player.ground=true}
+const hit={x:player.x+5,y:player.y+5,w:14,h:37};for(const p of platforms)if(hit.x+hit.w>p.x&&hit.x<p.x+p.w&&oldY+player.h<=p.y+3&&player.y+player.h>=p.y&&player.vy>=0){player.y=p.y-player.h;player.vy=0;player.ground=true}
 if(player.y>H+250){hurt(100);return}
 player.anim+=dt*(Math.abs(player.vx)>20?12:3);
 if(keys.attack||keys.x||keys.X){attack();keys.attack=false;keys.x=false;keys.X=false}if(keys.dash||keys.Shift){dash();keys.dash=false;keys.Shift=false}
-for(const e of enemies){if(!e.alive)continue;e.timer-=dt;let dx=player.x-e.x;if(Math.abs(dx)>12)e.x+=Math.sign(dx)*(e.type==='sentinel'?64:82)*dt;if(e.timer<=0&&Math.abs(dx)<38&&Math.abs(player.y-e.y)<50){hurt(e.type==='sentinel'?14:9);e.timer=1.15}if(e.flash>0)e.flash-=dt}
+for(const e of enemies){if(!e.alive)continue;e.timer-=dt;let dx=player.x-e.x;if(Math.abs(dx)>12)e.x+=Math.sign(dx)*(e.type==='sentinel'?64:82)*dt;if(e.timer<=0&&Math.abs(dx)<27&&Math.abs((player.y+player.h*.55)-(e.y+e.h*.55))<38){hurt(e.type==='sentinel'?14:9);e.timer=1.15}if(e.flash>0)e.flash-=dt}
 if(boss){boss.timer-=dt;let dx=player.x-boss.x;if(Math.abs(dx)>65)boss.x+=Math.sign(dx)*75*dt;if(boss.wind>0){boss.wind-=dt;if(boss.wind<=0){if(Math.abs(dx)<190)hurt(24);burst(boss.x+boss.w/2,boss.y+boss.h/2,C.red,25);boss.timer=1.3}}else if(boss.timer<=0&&Math.abs(dx)<310){boss.wind=.65;log('Le Veilleur charge son attaque — esquive !')}if(boss.hp<boss.max*.5)boss.phase=2;if(boss.flash>0)boss.flash-=dt}
-for(const l of [...loot]){l.phase+=dt*4;if(Math.abs(player.x-l.x)<28&&Math.abs(player.y-l.y)<45){loot=loot.filter(q=>q!==l);if(l.type==='relic'){relics++;atk+=3;log('Relique ivoire absorbée : ATQ +3.')}else{hp=Math.min(maxHp,hp+25);log('Éclat rouge : +25 intégrité.')}burst(l.x,l.y,l.type==='relic'?C.cream:C.red,12);sound(440,.13,'triangle',.04,260);updateUI()}}
+for(const l of [...loot]){l.phase+=dt*4;if(Math.abs((player.x+player.w/2)-l.x)<18&&Math.abs((player.y+player.h*.55)-l.y)<30){loot=loot.filter(q=>q!==l);if(l.type==='relic'){relics++;atk+=3;log('Relique ivoire absorbée : ATQ +3.')}else{hp=Math.min(maxHp,hp+25);log('Éclat rouge : +25 intégrité.')}burst(l.x,l.y,l.type==='relic'?C.cream:C.red,12);sound(440,.13,'triangle',.04,260);updateUI()}}
 for(const p of particles){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=280*dt;p.life-=dt}particles=particles.filter(p=>p.life>0);
 if(player.x>exitX&&!boss){if(act===3)end(true);else nextAct()}
 updateUI()}
@@ -111,8 +111,11 @@ function backdrop(){let sky=ctx.createLinearGradient(0,0,0,H);sky.addColorStop(0
  // film sun and distant ruins
  ctx.fillStyle='#eee0c0';ctx.beginPath();ctx.arc(710-camera*.04,120,57,0,Math.PI*2);ctx.fill();
  for(let i=0;i<10;i++){let x=((i*145-camera*.18)%1400+1400)%1400-100;rr(x,250-(i%3)*35,70,4,'#9b9787');rr(x+9,165-(i%3)*35,7,90,'#9b9787');rr(x+49,195-(i%3)*35,8,60,'#a6a08e');rr(x+2,253-(i%3)*35,80,3,'#d5c8ae')}
- // foreground columns
- for(let i=0;i<12;i++){let x=((i*132-camera*.34)%1550+1550)%1550-90;rr(x,310,14,160,'#77786f');rr(x-7,303,28,9,'#555b59');rr(x+3,332,3,72,'#a59b84')}
+ // ruined skyline: broken towers, windows and suspended bridges
+ for(let i=0;i<13;i++){let x=((i*118-camera*.22)%1500+1500)%1500-80;let h=70+(i%4)*25;rr(x,295-h,34,h,'#a19b89');rr(x+5,300-h,24,h-4,'#b5aa93');rr(x+8,310-h,4,9,'#77786f');rr(x+21,325-h,4,12,'#77786f');rr(x+2,295-h,31,3,'#e0d3b7');if(i%3===0){rr(x-8,310-h,50,3,'#8b897d');rr(x+14,300-h,3,20,'#77786f')}}
+ // foreground columns and broken masonry
+ for(let i=0;i<12;i++){let x=((i*132-camera*.34)%1550+1550)%1550-90;rr(x,310,14,160,'#77786f');rr(x-7,303,28,9,'#555b59');rr(x+3,332,3,72,'#a59b84');rr(x-3,420,25,4,'#555b59');}
+ for(let i=0;i<22;i++){let x=((i*47-camera*.48)%1500+1500)%1500-30,y=430+(i%4)*19;rr(x,y,10+(i%3)*5,3,'#888476');rr(x+4,y-4,4,4,'#9f9580')}
  // fine film scratches
  for(let i=0;i<20;i++){let x=(i*73+frame*.1)%W,y=(i*97)%H;rr(x,y,1,5,'#eee0c0')}
 }
