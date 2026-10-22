@@ -27,18 +27,72 @@ function mat(color,rough=.8,metal=0){return new THREE.MeshStandardMaterial({colo
 const concrete=mat('#555854',.92),edge=mat('#aaa18d',.7,.15),dark=mat('#171c1e',.6,.2),black=mat('#090c0e',.7,.1),silver=mat('#7c817d',.38,.72),pale=mat('#bdb7a7',.48,.5),red=mat('#a83e40',.4,.25),glass=new THREE.MeshStandardMaterial({color:'#9caba9',metalness:.8,roughness:.18,emissive:'#263433',emissiveIntensity:.6});
 function box(parent,w,h,d,material,x,y,z,cast=true){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material);m.position.set(x,y,z);m.castShadow=cast;m.receiveShadow=true;parent.add(m);return m}
 function cylinder(parent,r1,r2,h,material,x,y,z,seg=10){const m=new THREE.Mesh(new THREE.CylinderGeometry(r1,r2,h,seg),material);m.position.set(x,y,z);m.castShadow=true;parent.add(m);return m}
-function buildHero(){const g=new THREE.Group();const torso=box(g,.78,1.02,.42,dark,0,1.38,0);torso.rotation.z=-.03;
-box(g,.88,.2,.48,black,0,1.79,0);box(g,.18,.75,.48,black,-.27,1.43,.02).rotation.z=-.12;box(g,.18,.75,.48,black,.27,1.43,.02).rotation.z=.12;
-const legs=[];for(const x of [-.22,.22]){const leg=new THREE.Group();leg.position.set(x,.92,0);g.add(leg);box(leg,.29,.8,.34,black,0,-.28,0);box(leg,.31,.25,.38,dark,0,-.52,.03);box(leg,.36,.16,.58,black,0,-.67,.12);box(leg,.24,.035,.03,silver,0,-.58,.316,false);legs.push(leg)}
-const arms=[];for(const x of [-.52,.52]){const arm=new THREE.Group();arm.position.set(x,1.72,0);g.add(arm);box(arm,.23,.68,.28,black,0,-.3,0);box(arm,.26,.2,.3,dark,0,-.59,.02);box(arm,.23,.22,.24,black,0,-.73,.03);arms.push(arm)}
-// Backpack and harness based on the supplied techwear reference
-box(g,.57,.82,.28,black,0,1.52,-.32);box(g,.47,.08,.31,silver,0,1.91,-.34);
-for(const x of [-.29,.29]){const strap=box(g,.1,.83,.045,black,x,1.52,.24);strap.rotation.z=x<0?-.13:.13;box(g,.105,.09,.052,silver,x,1.39,.273,false)}
-box(g,.48,.1,.05,dark,0,1.55,.25);box(g,.045,.12,.06,red,.02,1.55,.285,false);
-// hood, cap brim, fully covered face and narrow visor
-cylinder(g,.33,.29,.4,black,0,2.18,0,12);const hood= new THREE.Mesh(new THREE.SphereGeometry(.34,12,10),dark);hood.position.set(0,2.32,-.01);hood.scale.set(1,1.13,.92);hood.castShadow=true;g.add(hood);
-box(g,.49,.065,.29,black,0,2.23,.25);box(g,.36,.045,.025,silver,0,2.25,.402,false);box(g,.26,.035,.025,glass,0,2.14,.38,false);box(g,.07,.025,.028,red,.06,2.14,.402,false);box(g,.34,.22,.07,black,0,2.02,.27);
-g.userData={legs,arms,torso};return g}
+function buildHero(){
+ const g=new THREE.Group();
+ const fabric=new THREE.MeshStandardMaterial({color:'#111416',roughness:.94,metalness:.02});
+ const fabricHi=new THREE.MeshStandardMaterial({color:'#292d2e',roughness:.78,metalness:.08});
+ const rubber=new THREE.MeshStandardMaterial({color:'#080a0b',roughness:.98});
+ const metal=new THREE.MeshStandardMaterial({color:'#777a73',roughness:.34,metalness:.72});
+ const lens=new THREE.MeshStandardMaterial({color:'#171e20',roughness:.16,metalness:.85,emissive:'#2b3435',emissiveIntensity:.5});
+ const redMat=new THREE.MeshStandardMaterial({color:'#8f3438',roughness:.5,metalness:.25,emissive:'#4d1114',emissiveIntensity:.2});
+ const sphere=(parent,geoMat,pos,scale,segments=16)=>{const m=new THREE.Mesh(new THREE.SphereGeometry(1,segments,Math.max(8,segments>>1)),geoMat);m.position.set(...pos);m.scale.set(...scale);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m};
+ const capsule=(parent,r,h,material,pos)=>{const m=new THREE.Mesh(new THREE.CapsuleGeometry(r,h,5,10),material);m.position.set(...pos);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m};
+ // backpack silhouette behind the body
+ const pack=new THREE.Group();pack.position.set(0,1.43,-.31);g.add(pack);
+ sphere(pack,fabric,[0,.02,-.04],[.36,.49,.19],18);
+ box(pack,.52,.1,.28,fabricHi,0,.38,-.02);box(pack,.38,.055,.29,metal,0,.31,.015);
+ box(pack,.39,.19,.12,rubber,0,-.12,.13);box(pack,.035,.13,.025,redMat,.13,-.12,.2,false);
+ // hips and layered technical jacket
+ sphere(g,fabric,[0,.97,0],[.39,.28,.27],18);
+ const chest=sphere(g,fabric,[0,1.43,0],[.43,.52,.28],20);chest.rotation.z=-.035;
+ sphere(g,fabricHi,[-.29,1.66,.015],[.2,.17,.28],14);sphere(g,fabricHi,[.29,1.66,.015],[.2,.17,.28],14);
+ // jacket zip and chest harness
+ box(g,.018,.69,.018,metal,0,1.39,.281,false);
+ box(g,.82,.075,.045,rubber,0,1.52,.265);box(g,.11,.105,.05,metal,.03,1.52,.295,false);
+ box(g,.065,.11,.03,redMat,.1,1.52,.319,false);
+ for(const side of [-1,1]){
+  const strap=box(g,.075,.74,.045,rubber,side*.24,1.43,.255);strap.rotation.z=side*.12;
+  box(g,.085,.1,.055,metal,side*.24,1.25,.29,false);
+  // cargo sleeves
+  const arm=new THREE.Group();arm.position.set(side*.47,1.62,0);g.add(arm);
+  capsule(arm,.125,.46,fabric,[side*.025,-.25,0]);sphere(arm,fabricHi,[side*.025,-.48,.015],[.14,.14,.14],12);
+  box(arm,.25,.07,.27,rubber,side*.025,-.22,.015);
+  box(arm,.19,.08,.035,metal,side*.025,-.2,.158,false);
+  if(side===1)box(arm,.035,.15,.03,redMat,.07,-.23,.17,false);
+  g.userData.arms=g.userData.arms||[];g.userData.arms.push(arm);
+ }
+ // articulated cargo legs and chunky technical shoes
+ const legs=[];
+ for(const side of [-1,1]){
+  const leg=new THREE.Group();leg.position.set(side*.2,.91,0);g.add(leg);
+  capsule(leg,.145,.43,fabric,[0,-.21,0]);
+  sphere(leg,fabricHi,[side*.01,-.46,.01],[.15,.14,.16],12);
+  capsule(leg,.13,.33,fabric,[side*.015,-.66,0]);
+  // utility cargo pocket and zip pull
+  box(leg,.23,.22,.19,fabricHi,[side*.025,-.35,.135][0],-0.35,.12);
+  box(leg,.15,.018,.025,metal,side*.025,-.31,.224,false);
+  box(leg,.035,.07,.02,metal,side*.07,-.39,.225,false);
+  const shoe=sphere(leg,rubber,[0,-.86,.105],[.2,.105,.32],14);
+  box(leg,.2,.025,.23,fabricHi,0,-.83,.15);
+  legs.push(leg);
+ }
+ // hood and cap over a fully covered face
+ sphere(g,fabricHi,[0,2.18,-.005],[.34,.39,.31],20);
+ sphere(g,fabric,[0,2.23,-.075],[.32,.34,.29],18);
+ // cap crown and forward brim
+ sphere(g,rubber,[0,2.34,.105],[.29,.13,.27],16);
+ const brim= new THREE.Mesh(new THREE.CylinderGeometry(.23,.27,.045,20,1,false,0,Math.PI),rubber);brim.rotation.x=Math.PI/2;brim.position.set(0,2.27,.31);brim.scale.set(1,.7,1);brim.castShadow=true;g.add(brim);
+ // mask wraps lower face; only a narrow tinted lens remains visible
+ sphere(g,rubber,[0,2.08,.19],[.235,.22,.16],16);
+ const glasses=sphere(g,lens,[0,2.19,.22],[.25,.07,.075],16);
+ box(g,.28,.012,.012,metal,0,2.2,.29,false);
+ box(g,.035,.028,.018,redMat,.08,2.18,.294,false);
+ // hood seam and cord ends
+ const seam= new THREE.Mesh(new THREE.TorusGeometry(.29,.012,6,24,Math.PI),metal);seam.rotation.z=Math.PI;seam.position.set(0,2.25,.02);g.add(seam);
+ for(const side of [-1,1]){const cord=capsule(g,.012,.12,metal,[side*.22,1.98,.2]);cord.rotation.z=side*.18}
+ g.userData={...(g.userData||{}),legs,torso:chest};
+ return g
+}
 player=buildHero();player.position.set(0,0,0);scene.add(player);
 function buildArchitecture(){// broad ground plane
 const ground=box(worldGroup,240,.5,30,mat('#4b4b45',.96),0,-.34,-2,false);
