@@ -100,7 +100,7 @@ if(player.x>exitX&&!boss){if(act===3)end(true);else nextAct()}
 updateUI()}
 function rr(x,y,w,h,color){ctx.fillStyle=color;ctx.fillRect(Math.round(x),Math.round(y),Math.ceil(w),Math.ceil(h))}
 function drawHero(x,y){let run=Math.abs(player.vx)>30,step=run?Math.sin(player.anim)*4:Math.sin(frame*.05)*1;let blink=inv>0&&Math.floor(frame/4)%2===0;if(blink)return;
-if(spriteSheet.complete&&spriteSheet.naturalWidth){let col=attackT>0?((Math.floor(frame/3)%4)+4):Math.floor(player.anim/3)%4;ctx.save();if(player.face<0){ctx.translate(Math.round(x*2+player.w),0);ctx.scale(-1,1);ctx.drawImage(spriteSheet,col*32,144,32,48,0,Math.round(y-3),32,48)}else{ctx.drawImage(spriteSheet,col*32,144,32,48,Math.round(x-4),Math.round(y-3),32,48)}ctx.restore();return}
+if(spriteSheet.complete&&spriteSheet.naturalWidth){let row=inv>0?192:(dashT>0?144:(attackT>0?96:(run?48:0)));let col=Math.floor(frame/(attackT>0?2:4))%8;ctx.save();if(player.face<0){ctx.translate(Math.round(x*2+player.w),0);ctx.scale(-1,1);ctx.drawImage(spriteSheet,col*32,row,32,48,0,Math.round(y-3),32,48)}else{ctx.drawImage(spriteSheet,col*32,row,32,48,Math.round(x-4),Math.round(y-3),32,48)}ctx.restore();return}
 rr(x+4,y+player.h-3,20,4,'#645f54');rr(x+6,y+7,14,20,'#292d30');rr(x+3,y+12,18,15,'#363b3c');rr(x+3+step,y+35,9,5,C.ink);rr(x+13-step,y+35,9,5,C.ink);rr(x+3,y+1,18,14,C.cream);rr(x+7,y+7,12,5,C.ink);rr(x+12,y+9,6,2,C.red);
 }
 function drawEnemy(e){let x=e.x-camera,y=e.y;let flash=e.flash>0;if(spriteSheet.complete&&spriteSheet.naturalWidth){let col=Math.floor(frame/8)%4;ctx.drawImage(spriteSheet,col*32,240,32,48,Math.round(x-4),Math.round(y-8),32,48);if(flash)rr(x,y, e.w,e.h,C.cream);return}
