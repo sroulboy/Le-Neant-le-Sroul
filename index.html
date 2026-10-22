@@ -4,11 +4,11 @@
 :root{color-scheme:dark;--bone:#e5dcc8;--red:#b44b46;--muted:#a7a295}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#171a1b;color:var(--bone);font-family:Inter,ui-sans-serif,system-ui,-apple-system,sans-serif}body{touch-action:none}#world{position:fixed;inset:0;width:100%;height:100%;display:block;outline:0}.grain{pointer-events:none;position:fixed;inset:0;z-index:2;opacity:.12;background:repeating-linear-gradient(0deg,transparent 0 3px,#d6d0c1 4px,transparent 5px);mix-blend-mode:soft-light}.vignette{position:fixed;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at center,transparent 42%,#050708a8 100%)}header{position:fixed;top:0;left:0;right:0;z-index:4;padding:calc(18px + env(safe-area-inset-top)) clamp(16px,4vw,48px) 12px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;background:linear-gradient(#111516a8,transparent)}.brand{font-size:clamp(13px,2vw,18px);letter-spacing:.24em;font-weight:800}.brand span{color:var(--red)}.chapter{text-align:right;color:#d1c7b3;font-size:9px;letter-spacing:.22em;line-height:1.8}.hud{position:fixed;top:84px;left:clamp(16px,4vw,48px);z-index:4;width:min(230px,45vw);opacity:0;transition:opacity .3s}.playing .hud{opacity:1}.meter-label{display:flex;justify-content:space-between;font-size:9px;letter-spacing:.18em;margin:0 0 7px}.bar{height:4px;background:#ddd4c52c;margin-bottom:14px}.bar i{display:block;width:100%;height:100%;background:var(--red);transition:width .2s}.xpbar i{background:var(--bone)}.hint{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:4;white-space:nowrap;font-size:9px;letter-spacing:.2em;color:#ded5c1a8;text-align:center}.overlay{position:fixed;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;background:linear-gradient(110deg,#111516df,#171a1bb0 60%,#111516d6);transition:opacity .35s}.overlay.hidden{opacity:0;pointer-events:none}.intro{width:min(650px,100%)}.eyebrow{font-size:9px;letter-spacing:.36em;color:#c5bba5}.intro h1{font-size:clamp(48px,11vw,100px);letter-spacing:.11em;line-height:.95;margin:22px 0 18px;font-weight:850;text-shadow:3px 3px 0 #a94340}.intro p{max-width:420px;margin:0 auto 24px;color:#c4beaf;font-size:12px;line-height:1.9}.start{border:1px solid #e5dcc8;background:#e5dcc8;color:#171a1b;padding:15px 24px;font:700 10px inherit;font-size:10px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer}.start:active{transform:scale(.98)}.controls{position:fixed;z-index:4;bottom:calc(45px + env(safe-area-inset-bottom));left:0;right:0;display:none;justify-content:space-between;align-items:flex-end;padding:0 18px;pointer-events:none}.playing .controls{display:flex}.cluster{display:flex;gap:8px;pointer-events:auto}.ctl{width:52px;height:52px;border:1px solid #e5dcc858;border-radius:50%;background:#171a1b66;color:#e5dcc8;backdrop-filter:blur(8px);font-size:19px;touch-action:none}.ctl.action{width:58px;height:58px;border-color:#b44b4680}.ctl:active{background:#b44b4666}.desktop-help{display:block}@media(max-width:700px){.desktop-help{display:none}.hint{bottom:calc(165px + env(safe-area-inset-bottom));font-size:8px}.hud{top:76px}.controls{bottom:calc(24px + env(safe-area-inset-bottom))}}@media(min-width:701px){.controls{display:none!important}.hint{bottom:24px}}
 </style></head><body>
 <canvas id="world" aria-label="Jeu 3D Le Néant"></canvas><div class="grain"></div><div class="vignette"></div>
-<header><div class="brand">LE SROUL <span>/</span> EXE</div><div class="chapter">LE NÉANT<br>PROTOCOLE 3D · ACTE 01</div></header>
+<header><div class="brand">LE SROUL <span>/</span> EXE</div><div class="chapter">LE NÉANT<br>3D CINÉMATIQUE · ACTE 01</div></header>
 <div class="hud"><div class="meter-label"><span>INTÉGRITÉ</span><span id="hpText">100 / 100</span></div><div class="bar"><i id="hpBar"></i></div><div class="meter-label"><span>EXPÉRIENCE</span><span id="xpText">0 / 100</span></div><div class="bar xpbar"><i id="xpBar"></i></div></div>
 <div class="hint"><span class="desktop-help">A / D OU ← / → : SE DÉPLACER · ESPACE : SAUTER · X : FRAPPER</span><span class="mobile-help">UTILISE LES COMMANDES POUR EXPLORER</span></div>
 <div class="controls"><div class="cluster"><button class="ctl" data-key="left" aria-label="Gauche">←</button><button class="ctl" data-key="right" aria-label="Droite">→</button></div><div class="cluster"><button class="ctl action" data-key="jump" aria-label="Sauter">↑</button><button class="ctl action" data-key="attack" aria-label="Attaquer">✳</button></div></div>
-<div class="overlay" id="overlay"><div class="intro"><div class="eyebrow">UNE EXPÉDITION DANS LES ARCHIVES DU SOLEIL</div><h1>LE NÉANT</h1><p>Le monde a survécu à son propre futur. Traverse les vestiges d'une cité monumentale, dans une expérience d'action 3D à l'esthétique rétro-futuriste.</p><button class="start" id="start">ENTRER DANS LE NÉANT ↗</button><p style="font-size:9px;letter-spacing:.12em;margin-top:18px">3D TEMPS RÉEL · CAMÉRA CINÉMATIQUE · LE SROUL</p></div></div>
+<div class="overlay" id="overlay"><div class="intro"><div class="eyebrow">UNE EXPÉDITION DANS LES ARCHIVES DU SOLEIL</div><h1>LE NÉANT</h1><p>Le monde a survécu à son propre futur. Traverse les vestiges d'une cité monumentale, dans une expérience d'action 3D à l'esthétique rétro-futuriste.</p><button class="start" id="start">ENTRER DANS LE NÉANT ↗</button><p style="font-size:9px;letter-spacing:.12em;margin-top:18px">ENVIRONNEMENT 3D · ÉCLAIRAGE CINÉMATIQUE · LE SROUL</p></div></div>
 <script type="module">
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.module.js';
 const canvas=document.querySelector('#world'), overlay=document.querySelector('#overlay'), startBtn=document.querySelector('#start');
@@ -18,7 +18,7 @@ try{
 renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
 renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.7));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.15;
 scene=new THREE.Scene();scene.background=new THREE.Color('#77756d');scene.fog=new THREE.FogExp2('#77756d',.012);
-camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,.1,240);camera.position.set(0,4.2,12);
+camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,.1,240);camera.position.set(-6,5.2,10);
 clock=new THREE.Clock();worldGroup=new THREE.Group();scene.add(worldGroup);enemyGroup=new THREE.Group();scene.add(enemyGroup);
 scene.add(new THREE.HemisphereLight('#e7dfcf','#252a2c',2.0));
 const sun=new THREE.DirectionalLight('#f2dfbd',3.1);sun.position.set(-7,15,8);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);sun.shadow.camera.left=-18;sun.shadow.camera.right=18;sun.shadow.camera.top=18;sun.shadow.camera.bottom=-18;scene.add(sun);
@@ -94,8 +94,34 @@ function buildHero(){
  return g
 }
 player=buildHero();player.position.set(0,0,0);scene.add(player);
-function buildArchitecture(){// broad ground plane
-const ground=box(worldGroup,240,.5,30,mat('#4b4b45',.96),0,-.34,-2,false);
+function buildArchitecture(){// monumental cinematic 3D environment
+const groundMat=mat('#343735',.92,.12);
+const ground=box(worldGroup,280,.65,44,groundMat,95,-.42,-2,false);
+// layered distant skyline: silhouettes, towers and a monumental solar aperture
+const farMat=mat('#6f706a',.95),midMat=mat('#454946',.88,.08),blackMetal=mat('#202526',.46,.45);
+for(let i=0;i<36;i++){
+ const x=-30+i*9.5, z=-27-(i%5)*2.4, h=8+(Math.abs(i*19)%18), w=2.8+(i%4)*.8;
+ box(worldGroup,w,h,2.8,farMat,x,h*.5-0.15,z,false);
+ box(worldGroup,w+.08,.18,2.9,edge,x,h-.12,z,false);
+ if(i%4===0)box(worldGroup,w+1,.3,3.2,midMat,x,h*.62,z+.2,false);
+}
+// monumental broken ring, an iconic landmark against the haze
+const ring=new THREE.Mesh(new THREE.TorusGeometry(7.8,.42,12,72),blackMetal);
+ring.position.set(38,12,-20);ring.rotation.y=.22;ring.rotation.x=.12;ring.castShadow=true;worldGroup.add(ring);
+const ringInner=new THREE.Mesh(new THREE.TorusGeometry(6.9,.075,6,72),edge);
+ringInner.position.copy(ring.position);ringInner.rotation.copy(ring.rotation);worldGroup.add(ringInner);
+const sunDisc=new THREE.Mesh(new THREE.CircleGeometry(5.9,48),new THREE.MeshBasicMaterial({color:'#d1c2a2',transparent:true,opacity:.22,side:THREE.DoubleSide}));
+sunDisc.position.set(38,12,-21.2);worldGroup.add(sunDisc);
+// broken elevated transit bridges and heavy support pylons
+for(let i=0;i<12;i++){
+ const x=-15+i*14;
+ box(worldGroup,11,.38,1.3,midMat,x,5.2,-12-(i%3)*1.5);
+ box(worldGroup,.55,5.5,.7,concrete,x-4.5,2.6,-12-(i%3)*1.5);
+ box(worldGroup,.55,5.5,.7,concrete,x+4.5,2.6,-12-(i%3)*1.5);
+ for(let j=0;j<5;j++)box(worldGroup,.045,.9,.055,glass,x-3.7+j*1.85,5.45,-11.25-(i%3)*1.5,false);
+}
+// broad ground plane and distant industrial structures
+
 for(let i=-8;i<25;i++){const x=i*8;
 const h=5+(Math.abs(i*17)%9),w=2.3+(Math.abs(i*7)%3);
 box(worldGroup,w,h,3,concrete,x,h/2-0.1,-9-(i%3)*3);
@@ -129,7 +155,7 @@ function animate(){requestAnimationFrame(animate);const dt=Math.min(clock.getDel
 if(started&&!dead){let move=(keys.right?1:0)-(keys.left?1:0);player.position.x+=move*dt*5.3;player.position.x=Math.max(-7,Math.min(220,player.position.x));if(move)face=Math.sign(move);player.rotation.y=face>0?0:Math.PI;vy-=18*dt;player.position.y+=vy*dt;if(player.position.y<=0){player.position.y=0;vy=0;onGround=true}else onGround=false;
 const ud=player.userData;ud.legs[0].rotation.x=move?Math.sin(t*10)*.6:Math.sin(t*2)*.025;ud.legs[1].rotation.x=move?-Math.sin(t*10)*.6:0;ud.arms[0].rotation.x=move?-Math.sin(t*10)*.28:0;ud.arms[1].rotation.x=move?Math.sin(t*10)*.28:0;if(attackTime>0){attackTime-=dt;ud.arms[1].rotation.x=-1.7;ud.arms[1].rotation.y=-.3}else{ud.arms[1].rotation.y=0}
 for(const e of enemies){if(!e.userData.alive)continue;const dx=player.position.x-e.position.x;if(Math.abs(dx)<7){e.position.x+=Math.sign(dx)*dt*.75;if(Math.abs(dx)<1.4&&Math.random()<dt*.7){hp=Math.max(0,hp-5);updateHud();if(!hp){dead=true;started=false;overlay.classList.remove('hidden');overlay.querySelector('h1').textContent='SIGNAL PERDU';overlay.querySelector('.intro p').textContent='Le Sroul a été submergé par les sentinelles. Recommence ton expédition.';startBtn.textContent='RECOMMENCER ↗'}}}e.position.y=Math.sin(t*2+e.userData.phase)*.04}
-const target=new THREE.Vector3(player.position.x+face*.9,1.35,0);camera.position.x+=(player.position.x+face*1.5-camera.position.x)*Math.min(1,dt*2.6);camera.position.y+=(4.0+player.position.y*.25-camera.position.y)*Math.min(1,dt*2);camera.lookAt(target);scene.fog.density=.012;dust.position.x=-player.position.x*.05;renderer.render(scene,camera)}else{camera.position.x+=(0-camera.position.x)*.02;camera.lookAt(0,1,0);renderer.render(scene,camera)}
+const target=new THREE.Vector3(player.position.x+face*.9,1.35,0);camera.position.x+=(player.position.x-face*5.8-camera.position.x)*Math.min(1,dt*2.2);camera.position.y+=(4.1+player.position.y*.25-camera.position.y)*Math.min(1,dt*2);camera.position.z+=(10-camera.position.z)*Math.min(1,dt*1.4);camera.lookAt(target);scene.fog.density=.012;dust.position.x=-player.position.x*.05;renderer.render(scene,camera)}else{camera.position.x+=(0-camera.position.x)*.02;camera.lookAt(0,1,0);renderer.render(scene,camera)}
 }
 animate();
 }catch(err){console.error(err);overlay.classList.remove('hidden');overlay.querySelector('h1').textContent='3D INDISPONIBLE';overlay.querySelector('.intro p').textContent='Le navigateur n’a pas pu initialiser la scène 3D. Vérifie la connexion puis recharge la page.';startBtn.textContent='RECHARGER';startBtn.onclick=()=>location.reload()}
