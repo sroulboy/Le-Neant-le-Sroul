@@ -109,23 +109,27 @@ function drawHero(x,y){
  // legs: beveled tactical trousers and silver shin plates
  ctx.fillStyle='#252b2d';ctx.beginPath();ctx.moveTo(-12,8);ctx.lineTo(-2,8);ctx.lineTo(-5,27);ctx.lineTo(-14,29);ctx.closePath();ctx.fill();
  ctx.beginPath();ctx.moveTo(2,8);ctx.lineTo(12,8);ctx.lineTo(15,27);ctx.lineTo(5,29);ctx.closePath();ctx.fill();
- ctx.fillStyle='#d9ded8';ctx.beginPath();ctx.moveTo(-12,20);ctx.lineTo(-5,19);ctx.lineTo(-7,27);ctx.lineTo(-14,28);ctx.closePath();ctx.fill();
+ ctx.fillStyle='#565b59';ctx.beginPath();ctx.moveTo(-12,20);ctx.lineTo(-5,19);ctx.lineTo(-7,27);ctx.lineTo(-14,28);ctx.closePath();ctx.fill();
  ctx.beginPath();ctx.moveTo(7,19);ctx.lineTo(13,20);ctx.lineTo(15,28);ctx.lineTo(8,27);ctx.closePath();ctx.fill();
  // torso with hard-surface shoulder silhouette
- let body=ctx.createLinearGradient(-15,0,15,0);body.addColorStop(0,'#454c4d');body.addColorStop(.45,'#202729');body.addColorStop(1,'#747b78');
+ let body=ctx.createLinearGradient(-15,0,15,0);body.addColorStop(0,'#111517');body.addColorStop(.45,'#25292b');body.addColorStop(1,'#555957');
  ctx.fillStyle=body;ctx.beginPath();ctx.moveTo(-10,-17);ctx.lineTo(-16,-9);ctx.lineTo(-12,10);ctx.lineTo(11,10);ctx.lineTo(15,-8);ctx.lineTo(8,-17);ctx.closePath();ctx.fill();
  ctx.strokeStyle='#c5cbc5';ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(-10,-15);ctx.lineTo(-14,-8);ctx.lineTo(-10,4);ctx.stroke();
  ctx.fillStyle='#a83e40';ctx.beginPath();ctx.moveTo(-5,-15);ctx.lineTo(0,-13);ctx.lineTo(5,9);ctx.lineTo(1,10);ctx.closePath();ctx.fill();
  ctx.fillStyle='#e7e4d8';ctx.fillRect(5,-10,2,12);ctx.fillStyle='#8b918e';ctx.fillRect(-3,-5,5,7);
  // arms and articulated gloves
- ctx.fillStyle='#343b3c';ctx.beginPath();ctx.moveTo(-13,-13);ctx.lineTo(-19,-8);ctx.lineTo(-16,4);ctx.lineTo(-11,3);ctx.closePath();ctx.fill();
+ ctx.fillStyle='#111618';ctx.beginPath();ctx.moveTo(-13,-13);ctx.lineTo(-19,-8);ctx.lineTo(-16,4);ctx.lineTo(-11,3);ctx.closePath();ctx.fill();
  ctx.beginPath();ctx.moveTo(12,-13);ctx.lineTo(18,-8);ctx.lineTo(15,4);ctx.lineTo(10,3);ctx.closePath();ctx.fill();
- ctx.fillStyle='#d2d8d3';ctx.fillRect(-17,0,5,5);ctx.fillRect(11,0,5,5);
+ ctx.fillStyle='#555b59';ctx.fillRect(-17,0,5,5);ctx.fillRect(11,0,5,5);
+ // technical backpack, shoulder webbing and chest harness (inspired by reference outfit)
+ ctx.fillStyle='#080b0d';ctx.beginPath();ctx.moveTo(-13,-16);ctx.lineTo(-20,-12);ctx.lineTo(-19,4);ctx.lineTo(-12,9);ctx.lineTo(-10,-11);ctx.closePath();ctx.fill();
+ ctx.fillStyle='#090d0f';ctx.beginPath();ctx.moveTo(-12,-15);ctx.lineTo(-8,-17);ctx.lineTo(-4,7);ctx.lineTo(-8,8);ctx.closePath();ctx.fill();ctx.beginPath();ctx.moveTo(9,-17);ctx.lineTo(13,-14);ctx.lineTo(8,8);ctx.lineTo(4,7);ctx.closePath();ctx.fill();
+ ctx.strokeStyle='#777a74';ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(-11,-10);ctx.lineTo(10,-7);ctx.stroke();ctx.fillStyle='#a83e40';ctx.fillRect(1,-10,3,3);
  // hood, mask and luminous visor
- ctx.fillStyle='#181f22';ctx.beginPath();ctx.moveTo(-14,-27);ctx.lineTo(-10,-38);ctx.lineTo(0,-43);ctx.lineTo(11,-37);ctx.lineTo(15,-25);ctx.lineTo(10,-14);ctx.lineTo(-10,-14);ctx.closePath();ctx.fill();
- let hood=ctx.createLinearGradient(-12,-40,12,-18);hood.addColorStop(0,'#f0e8d5');hood.addColorStop(.45,'#bfc6c1');hood.addColorStop(1,'#596263');ctx.fillStyle=hood;ctx.beginPath();ctx.moveTo(-11,-29);ctx.lineTo(-8,-37);ctx.lineTo(0,-40);ctx.lineTo(8,-36);ctx.lineTo(11,-28);ctx.lineTo(8,-19);ctx.lineTo(-8,-19);ctx.closePath();ctx.fill();
- ctx.fillStyle='#151d21';ctx.beginPath();ctx.moveTo(-9,-29);ctx.lineTo(8,-29);ctx.lineTo(7,-22);ctx.lineTo(-7,-22);ctx.closePath();ctx.fill();
- ctx.shadowColor='#e9dfc8';ctx.shadowBlur=7;ctx.fillStyle='#e8ddc5';ctx.fillRect(-6,-27,12,2);ctx.shadowBlur=0;
+ ctx.fillStyle='#090c0f';ctx.beginPath();ctx.moveTo(-14,-27);ctx.lineTo(-10,-38);ctx.lineTo(0,-43);ctx.lineTo(11,-37);ctx.lineTo(15,-25);ctx.lineTo(10,-14);ctx.lineTo(-10,-14);ctx.closePath();ctx.fill();
+ let hood=ctx.createLinearGradient(-12,-40,12,-18);hood.addColorStop(0,'#55595a');hood.addColorStop(.45,'#24292c');hood.addColorStop(1,'#0b0f12');ctx.fillStyle=hood;ctx.beginPath();ctx.moveTo(-11,-29);ctx.lineTo(-8,-37);ctx.lineTo(0,-40);ctx.lineTo(8,-36);ctx.lineTo(11,-28);ctx.lineTo(8,-19);ctx.lineTo(-8,-19);ctx.closePath();ctx.fill();
+ ctx.fillStyle='#050709';ctx.beginPath();ctx.moveTo(-9,-29);ctx.lineTo(8,-29);ctx.lineTo(7,-22);ctx.lineTo(-7,-22);ctx.closePath();ctx.fill();
+ ctx.shadowColor='#c8c7bb';ctx.shadowBlur=5;ctx.fillStyle='#aaa99e';ctx.fillRect(-6,-27,12,2);ctx.shadowBlur=0;
  ctx.fillStyle='#a83e40';ctx.fillRect(2,-26,4,1);
  // tiny shoulder light and polished edges
  ctx.fillStyle='#c8d4d0';ctx.fillRect(11,-12,3,2);ctx.strokeStyle='#e4ddcd';ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(-8,-17);ctx.lineTo(8,-17);ctx.stroke();
@@ -155,17 +159,37 @@ function drawBoss(){
  if(boss.wind>0){ctx.strokeStyle='#c64b47';ctx.lineWidth=2;ctx.globalAlpha=.45+Math.sin(frame*.3)*.2;ctx.beginPath();ctx.ellipse(0,0,w*.7,h*.65,0,0,Math.PI*2);ctx.stroke()}
  ctx.restore();
 }
-function backdrop(){let sky=ctx.createLinearGradient(0,0,0,H);sky.addColorStop(0,'#d7cbb3');sky.addColorStop(.6,'#b2a58c');sky.addColorStop(1,'#7e7d70');ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
- // film sun and distant ruins
- ctx.fillStyle='#eee0c0';ctx.beginPath();ctx.arc(710-camera*.04,120,57,0,Math.PI*2);ctx.fill();
- for(let i=0;i<10;i++){let x=((i*145-camera*.18)%1400+1400)%1400-100;rr(x,250-(i%3)*35,70,4,'#9b9787');rr(x+9,165-(i%3)*35,7,90,'#9b9787');rr(x+49,195-(i%3)*35,8,60,'#a6a08e');rr(x+2,253-(i%3)*35,80,3,'#d5c8ae')}
- // ruined skyline: broken towers, windows and suspended bridges
- for(let i=0;i<13;i++){let x=((i*118-camera*.22)%1500+1500)%1500-80;let h=70+(i%4)*25;rr(x,295-h,34,h,'#a19b89');rr(x+5,300-h,24,h-4,'#b5aa93');rr(x+8,310-h,4,9,'#77786f');rr(x+21,325-h,4,12,'#77786f');rr(x+2,295-h,31,3,'#e0d3b7');if(i%3===0){rr(x-8,310-h,50,3,'#8b897d');rr(x+14,300-h,3,20,'#77786f')}}
- // foreground columns and broken masonry
- for(let i=0;i<12;i++){let x=((i*132-camera*.34)%1550+1550)%1550-90;rr(x,310,14,160,'#77786f');rr(x-7,303,28,9,'#555b59');rr(x+3,332,3,72,'#a59b84');rr(x-3,420,25,4,'#555b59');}
- for(let i=0;i<22;i++){let x=((i*47-camera*.48)%1500+1500)%1500-30,y=430+(i%4)*19;rr(x,y,10+(i%3)*5,3,'#888476');rr(x+4,y-4,4,4,'#9f9580')}
- // fine film scratches
- for(let i=0;i<20;i++){let x=(i*73+frame*.1)%W,y=(i*97)%H;rr(x,y,1,5,'#eee0c0')}
+function backdrop(){
+ // 0 — sky, desaturated concrete dusk
+ const sky=ctx.createLinearGradient(0,0,0,H);sky.addColorStop(0,'#171b1d');sky.addColorStop(.42,'#555653');sky.addColorStop(.76,'#a69b86');sky.addColorStop(1,'#6d6a60');ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
+ // distant sun through industrial smog
+ const sx=W*.76-camera*.025,sy=118;let halo=ctx.createRadialGradient(sx,sy,8,sx,sy,150);halo.addColorStop(0,'#eee1c766');halo.addColorStop(.35,'#d4c8af35');halo.addColorStop(1,'#d4c8af00');ctx.fillStyle=halo;ctx.fillRect(sx-155,sy-155,310,310);ctx.fillStyle='#ded2b7';ctx.globalAlpha=.7;ctx.beginPath();ctx.arc(sx,sy,30,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
+ // 1 — far skyline: silhouettes drift slowly
+ ctx.save();ctx.translate(-camera*.10,0);
+ for(let i=0;i<15;i++){let x=((i*112)%1700)-70,h=90+(i*37%115),top=255-h;ctx.fillStyle=i%3===0?'#656761':'#77766d';ctx.beginPath();ctx.moveTo(x,270);ctx.lineTo(x,top+12);ctx.lineTo(x+12,top);ctx.lineTo(x+43,top+4);ctx.lineTo(x+49,270);ctx.closePath();ctx.fill();ctx.fillStyle='#b6aa91';for(let wy=top+22;wy<255;wy+=24){ctx.fillRect(x+10,wy,3,7);ctx.fillRect(x+29,wy+7,3,5)}if(i%4===0){ctx.fillStyle='#888577';ctx.fillRect(x-22,top+38,95,3);ctx.fillRect(x+6,top+38,3,24)}}
+ ctx.restore();
+ // 2 — suspended transit bridges, cables and towers
+ ctx.save();ctx.translate(-camera*.20,0);ctx.strokeStyle='#777a73';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-20,214);ctx.lineTo(W+30,190);ctx.stroke();ctx.lineWidth=1;for(let i=0;i<12;i++){let x=i*75-((camera*.2)%75);ctx.strokeStyle='#8c8b7d';ctx.beginPath();ctx.moveTo(x,200);ctx.lineTo(x,279);ctx.stroke();ctx.fillStyle='#aaa18c';ctx.fillRect(x-3,276,7,3)}ctx.fillStyle='#8e897a';ctx.fillRect(-20,278,W+40,4);
+ for(let i=0;i<7;i++){let x=((i*180-camera*.20)%1300+1300)%1300-70;ctx.fillStyle='#696b65';ctx.fillRect(x,140,12,140);ctx.fillStyle='#99917e';ctx.fillRect(x-5,139,22,5);ctx.fillStyle='#343a3a';ctx.fillRect(x+3,157,3,43)}ctx.restore();
+ // atmospheric haze plane
+ let haze=ctx.createLinearGradient(0,210,0,390);haze.addColorStop(0,'#d5c9b000');haze.addColorStop(.65,'#d5c9b02b');haze.addColorStop(1,'#d5c9b000');ctx.fillStyle=haze;ctx.fillRect(0,205,W,190);
+ // 3 — midground brutalist concrete monoliths, parallax .38
+ ctx.save();ctx.translate(-camera*.38,0);
+ for(let i=0;i<9;i++){let x=i*168-((camera*.38)%1512)-30,w=48+(i%3)*18,h=155+(i%4)*26,y=296-h;
+ ctx.fillStyle='#484b49';ctx.beginPath();ctx.moveTo(x+4,y);ctx.lineTo(x+w,y+7);ctx.lineTo(x+w-4,420);ctx.lineTo(x,420);ctx.closePath();ctx.fill();
+ let face=ctx.createLinearGradient(x,y,x+w,y);face.addColorStop(0,'#77776d');face.addColorStop(.28,'#5b5e5a');face.addColorStop(1,'#292f30');ctx.fillStyle=face;ctx.fillRect(x+6,y+8,w-14,420-y-8);
+ ctx.fillStyle='#999282';ctx.fillRect(x+6,y+8,3,420-y-8);ctx.fillStyle='#242a2c';ctx.fillRect(x+w*.58,y+18,5,Math.max(20,h-35));
+ ctx.strokeStyle='#aaa18e55';ctx.lineWidth=1;for(let yy=y+35;yy<390;yy+=42){ctx.beginPath();ctx.moveTo(x+10,yy);ctx.lineTo(x+w-12,yy-2);ctx.stroke()}
+ if(i%2===0){ctx.fillStyle='#292e30';ctx.fillRect(x-16,y+65,w+30,7);ctx.fillStyle='#8d8a7d';ctx.fillRect(x-16,y+65,w+30,2)}
+ }
+ ctx.restore();
+ // drifting dust and fine rain streaks
+ for(let i=0;i<36;i++){let x=(i*67-frame*(.25+i%3*.08)+W*4)%W,y=(i*43+frame*(.18+i%4*.06))%H;ctx.strokeStyle=i%4===0?'#eee1c77a':'#e4ddcb35';ctx.lineWidth=i%4===0?1:.6;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x-2,y+5+(i%4)*2);ctx.stroke()}
+ // foreground architecture silhouette for depth; moves faster than world
+ ctx.save();ctx.translate(-camera*.66,0);for(let i=0;i<8;i++){let x=i*190-((camera*.66)%1520)-35,w=13+(i%3)*9;ctx.fillStyle='#202629';ctx.fillRect(x,0,w,H);ctx.fillStyle='#555853';ctx.fillRect(x+w,0,3,H);ctx.fillStyle='#b2a58b';ctx.globalAlpha=.25;ctx.fillRect(x+w+3,0,1,H);ctx.globalAlpha=1}
+ ctx.restore();
+ // vignette and cinematic film grain
+ let vign=ctx.createRadialGradient(W*.52,H*.48,70,W*.52,H*.48,Math.max(W,H)*.78);vign.addColorStop(0,'#10141600');vign.addColorStop(1,'#10141688');ctx.fillStyle=vign;ctx.fillRect(0,0,W,H);
 }
 function draw(){ctx.clearRect(0,0,W,H);camera=clamp(player.x-W*.36,0,worldW-W);ctx.save();if(shake>1)ctx.translate(rand(-shake,shake),rand(-shake,shake));backdrop();ctx.save();ctx.translate(-camera,0);
  // world floor and platforms
