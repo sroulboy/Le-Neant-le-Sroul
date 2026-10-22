@@ -1,7 +1,52 @@
 <!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#d7cbb4"><title>LE NÉANT — LE SROUL</title>
 <style>
-:root{--cream:#e6dcc7;--paper:#bcb19a;--ink:#22282b;--red:#a83e40;--silver:#d9dfe0}*{box-sizing:border-box}html,body{margin:0;background:#22272a;color:var(--cream);font-family:ui-monospace,monospace;overscroll-behavior:none}body{padding:12px;background:radial-gradient(ellipse at 50% 0,#66665e,#272b2d 65%,#17191b)}main{max-width:1120px;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;padding:8px 2px 14px;border-bottom:1px solid #74756d;margin-bottom:12px}.logo{font-weight:bold;letter-spacing:.24em;font-size:15px}.tag{font-size:9px;letter-spacing:.14em;color:#c7bca6}.layout{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:12px}.panel{border:1px solid #76766d;background:#24292b;border-radius:4px;overflow:hidden}.screen{padding:8px}.head,.foot{display:flex;justify-content:space-between;gap:8px;padding:5px 3px 9px;font-size:9px;letter-spacing:.12em;color:#c8c0ae}.foot{padding:9px 3px 3px;line-height:1.5}.stage{position:relative}.game{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#b7aa91;image-rendering:pixelated;touch-action:none;border:1px solid #9c927e}.overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:18px;background:linear-gradient(120deg,#1c2020ee,#25292bdc);z-index:2}.ovinner{max-width:430px}.eyebrow{font-size:9px;letter-spacing:.25em;color:#d3c5a8}.overlay h1{font-size:clamp(34px,7vw,65px);letter-spacing:.18em;margin:13px 0 4px;color:#eee4cf;text-shadow:3px 3px #a83e40}.subtitle{font-size:10px;letter-spacing:.2em}.overlay p{font-size:10px;line-height:1.9;color:#d0c6b3}.btn{font:inherit;font-size:10px;letter-spacing:.08em;background:#303537;color:#eee4cf;border:1px solid #b6aa91;border-radius:3px;padding:10px;touch-action:manipulation}.primary{background:#e3d7bf;color:#22272a;font-weight:bold}.side{padding:13px}.sect{font-size:9px;letter-spacing:.2em;color:#c8bca5;margin:2px 0 12px}.meter{margin-bottom:13px}.mlabel{display:flex;justify-content:space-between;font-size:10px;margin-bottom:5px}.bar{height:6px;background:#444746;border:1px solid #77766d}.fill{height:100%;width:100%;transition:width .12s}.hp{background:#b84a48}.xp{background:#e0d3b8}.bossfill{height:100%;background:#a83e40;width:0}.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:13px 0}.stat{border:1px solid #555953;padding:8px}.stat small{display:block;color:#b5ad9d;font-size:8px;margin-bottom:5px}.stat b{font-size:16px;font-weight:500}.log{font-size:9px;line-height:1.6;height:120px;overflow:hidden;color:#ddd1bb}.log div{padding:4px 0;border-bottom:1px solid #3c4140}.actions{display:flex;gap:6px;margin-top:10px}.actions .btn{flex:1}.touch{display:none;grid-template-columns:repeat(3,44px);grid-template-rows:repeat(2,38px);gap:4px;margin:10px auto 0;width:max-content}.touch .blank{visibility:hidden}.mobile-actions{display:none;justify-content:center;gap:7px;margin-top:6px}.mobile-actions .btn{width:85px}.help{font-size:9px;line-height:1.7;color:#b7ad9a;margin-top:12px}.end{text-align:center;font-size:8px;letter-spacing:.16em;color:#9e9686;margin:12px 0 4px}@media(max-width:760px){body{padding:6px}.layout{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}.wide,.sect{grid-column:1/-1}.log{height:72px}.touch,.mobile-actions{display:grid}.mobile-actions{display:flex}.desktop{display:none}.side{padding:10px}.stats{margin-top:0}.head,.foot{font-size:8px}}
+:root{--cream:#e8ddc5;--paper:#c6b99f;--ink:#22282b;--red:#a83e40;--silver:#d9dfe0;--muted:#aaa493}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#202426;color:var(--cream);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+body{padding:clamp(10px,2vw,24px);background:radial-gradient(ellipse at 50% 0,#55574f,#202426 65%)}
+main{max-width:1160px;margin:0 auto}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 2px 18px;margin-bottom:14px}
+.logo{font-weight:800;letter-spacing:.22em;font-size:clamp(14px,2vw,20px)}
+.tag{font-size:10px;letter-spacing:.14em;color:#bcb39f;text-align:right}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:24px;align-items:start}
+.panel{background:rgba(28,32,33,.72);border:0;border-radius:0;overflow:hidden}
+.screen{padding:clamp(8px,1.5vw,18px)}
+.head,.foot{display:flex;justify-content:space-between;gap:10px;padding:5px 2px 12px;font-size:10px;letter-spacing:.12em;color:#c8c0ae}
+.foot{padding:12px 2px 4px;line-height:1.6}
+.stage{position:relative}
+.game{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#b7aa91;image-rendering:pixelated;touch-action:none;border:0}
+.overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:18px;background:linear-gradient(120deg,#1c2020ed,#25292bd9);z-index:2}
+.ovinner{max-width:480px}
+.eyebrow{font-size:10px;letter-spacing:.25em;color:#d3c5a8}
+.overlay h1{font-size:clamp(34px,7vw,68px);letter-spacing:.16em;margin:14px 0 5px;color:#eee4cf;text-shadow:3px 3px #a83e40}
+.subtitle{font-size:10px;letter-spacing:.2em}
+.overlay p{font-size:11px;line-height:1.85;color:#d0c6b3}
+.btn{font:inherit;font-size:11px;letter-spacing:.08em;background:#303537;color:#eee4cf;border:0;border-radius:2px;padding:12px 14px;touch-action:manipulation;cursor:pointer}
+.btn:active{transform:translateY(1px);background:#454a48}
+.primary{background:#e3d7bf;color:#22272a;font-weight:bold;padding:14px 18px}
+.side{padding:16px 4px;background:transparent}
+.sect{font-size:10px;letter-spacing:.2em;color:#c8bca5;margin:2px 0 14px}
+.meter{margin-bottom:16px}
+.mlabel{display:flex;justify-content:space-between;gap:8px;font-size:10px;margin-bottom:7px}
+.bar{height:5px;background:#444746;border:0}
+.fill{height:100%;width:100%;transition:width .12s}
+.hp{background:#b84a48}.xp{background:#e0d3b8}.bossfill{height:100%;background:#a83e40;width:0}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:16px 12px;margin:18px 0 24px}
+.stat{border:0;border-bottom:1px solid #4b4e48;padding:0 0 10px}
+.stat small{display:block;color:#b5ad9d;font-size:9px;margin-bottom:7px;letter-spacing:.08em}
+.stat b{font-size:22px;font-weight:500}
+.log{font-size:10px;line-height:1.7;min-height:80px;max-height:110px;overflow:hidden;color:#ddd1bb}
+.log div{padding:4px 0;border:0}
+.actions{display:flex;gap:8px;margin-top:14px}
+.actions .btn{flex:1;padding:10px 6px}
+.touch{display:none;grid-template-columns:repeat(3,48px);grid-template-rows:repeat(2,42px);gap:5px;margin:12px auto 0;width:max-content}
+.touch .blank{visibility:hidden}
+.mobile-actions{display:none;justify-content:center;gap:8px;margin-top:8px}
+.mobile-actions .btn{width:110px}
+.help{font-size:9px;line-height:1.7;color:#b7ad9a;margin-top:14px}
+.end{text-align:center;font-size:9px;letter-spacing:.16em;color:#9e9686;margin:18px 0 4px}
+@media(max-width:760px){body{padding:8px}.layout{grid-template-columns:1fr;gap:10px}.side{display:grid;grid-template-columns:1fr 1fr;gap:0 14px;padding:14px 4px}.wide,.sect{grid-column:1/-1}.log{min-height:48px;max-height:70px}.touch,.mobile-actions{display:grid}.mobile-actions{display:flex}.desktop{display:none}.stats{margin-top:0}.head,.foot{font-size:8px}.tag{font-size:8px}.screen{padding:5px 0}.head,.foot{padding-left:4px;padding-right:4px}}
 </style></head><body><main><header class="top"><div class="logo">LE SROUL <span style="color:#b84a48">/</span> EXE</div><div class="tag">PIXEL CINÉMA · PROTOCOLE 003</div></header>
 <div class="layout"><section class="panel screen"><div class="head"><span>LE NÉANT // ARCHIVES DU SOLEIL</span><span id="floor">ACTE 01</span></div><div class="stage"><canvas id="game" class="game" width="960" height="540"></canvas><div class="overlay" id="overlay" style="display:flex"><div class="ovinner"><div class="eyebrow">UN VOYAGE VINTAGE FUTURISTE</div><h1>LE NÉANT</h1><div class="subtitle">EXPLORE · COMBATS · RECOMMENCE</div><p>Incarne Le Sroul, traverse trois secteurs fracturés et affronte le Veilleur. Pixel art animé, combats de profil et sonorités synthétiques générées en direct.</p><p>CLAVIER : A/D OU FLÈCHES · SAUT : ESPACE · ATTAQUE : X · ESQUIVE : SHIFT<br>TACTILE : FLÈCHES, SAUT, ATTAQUE, ESQUIVE</p><button id="start" class="btn primary">COMMENCER L'EXPÉDITION ↗</button></div></div></div><div class="foot"><span>A/D : MARCHER · ESPACE : SAUTER · X : ATTAQUER</span><span>SHIFT : ESQUIVER · BOSS EN FIN D'ACTE</span></div>
 <div class="touch"><button class="blank btn">·</button><button class="btn" data-key="jump">↑</button><button class="blank btn">·</button><button class="btn" data-key="left">←</button><button class="btn" data-key="down">↓</button><button class="btn" data-key="right">→</button></div><div class="mobile-actions"><button class="btn" data-key="attack">ATTAQUE</button><button class="btn" data-key="dash">ESQUIVE</button></div></section>
@@ -10,6 +55,7 @@
 (()=>{'use strict';
 const c=document.getElementById('game'),ctx=c.getContext('2d'),W=c.width,H=c.height,$=id=>document.getElementById(id);
 ctx.imageSmoothingEnabled=false;
+if(!c||!ctx)throw new Error('Canvas indisponible');
 const spriteSheet=new Image();spriteSheet.src='assets/sprite-sheet.svg';spriteSheet.onload=()=>{ctx.imageSmoothingEnabled=false};
 const keys={},C={ink:'#262b2d',deep:'#373b3b',stone:'#77786f',sand:'#c6b99f',cream:'#e8ddc5',silver:'#dce0dc',red:'#a83e40',gold:'#c6a66d'};
 let state='title',paused=false,frame=0,last=0,act=1,score=0,xp=0,xpNeed=20,hp=100,maxHp=100,atk=20,relics=0,kills=0,camera=0,shake=0,attackT=0,dashT=0,dashCD=0,inv=0,particles=[],loot=[],enemies=[],platforms=[],boss=null,exitX=0,worldW=2600,player,audio=null,soundOn=true,checkpoint=0;
@@ -27,7 +73,7 @@ if(act===3){enemies=[];boss={x:worldW-390,y:400,w:68,h:76,hp:420,max:420,phase:1
 else log('ACTE '+act+' — les archives reprennent forme.');
 $('floor').textContent='ACTE '+String(act).padStart(2,'0');updateUI()}
 function makeEnemy(x,y,type){return{x,y,w:type==='sentinel'?25:20,h:type==='sentinel'?29:25,vx:0,hp:type==='sentinel'?55+act*8:35+act*6,max:type==='sentinel'?55+act*8:35+act*6,type,dir:-1,timer:rand(.5,1.5),flash:0,alive:true}}
-function start(){try{audio=audio||(()=>{try{return new(window.AudioContext||window.webkitAudioContext)()}catch(e){return null}})();state='play';paused=false;act=1;xp=0;xpNeed=20;hp=maxHp=100;atk=20;relics=0;kills=0;score=0;frame=0;player={x:60,y:390,w:24,h:42,vx:0,vy:0,face:1,ground:false,anim:0,attack:0,dash:0};$('overlay').style.display='none';$('log').innerHTML='';log('Connexion établie. Une lumière ancienne apparaît.');makeLevel();last=performance.now();$('overlay').style.display='none';requestAnimationFrame(loop)}catch(err){state='title';$('overlay').style.display='flex';$('overlay').innerHTML='<div class="ovinner"><div class="eyebrow">ERREUR DE DÉMARRAGE</div><h1>LE NÉANT</h1><p>Le jeu n’a pas pu démarrer. Recharge la page puis réessaie.</p><button id="retry" class="btn primary">RÉESSAYER ↗</button></div>';const retry=$('retry');if(retry)retry.onclick=start;console.error('Start error',err)}}
+function start(){try{audio=audio||(()=>{try{return new(window.AudioContext||window.webkitAudioContext)()}catch(e){return null}})();state='play';paused=false;act=1;xp=0;xpNeed=20;hp=maxHp=100;atk=20;relics=0;kills=0;score=0;frame=0;player={x:60,y:390,w:24,h:42,vx:0,vy:0,face:1,ground:false,anim:0,attack:0,dash:0};$('overlay').style.display='none';$('log').innerHTML='';log('Connexion établie. Une lumière ancienne apparaît.');makeLevel();last=performance.now();$('overlay').style.display='none';requestAnimationFrame(loop)}catch(err){state='title';$('overlay').style.display='flex';$('overlay').innerHTML='<div class="ovinner"><div class="eyebrow">ERREUR DE DÉMARRAGE</div><h1>LE NÉANT</h1><p>Le démarrage a échoué : '+String(err&&err.message||err||'erreur inconnue')+'.</p><button id="retry" class="btn primary">RÉESSAYER ↗</button></div>';const retry=$('retry');if(retry)retry.onclick=start;console.error('Start error',err)}}
 function updateUI(){$('hpText').textContent=Math.ceil(hp)+' / '+maxHp;$('hpBar').style.width=clamp(hp/maxHp*100,0,100)+'%';$('xpText').textContent=xp+' / '+xpNeed;$('xpBar').style.width=clamp(xp/xpNeed*100,0,100)+'%';$('level').textContent=String(Math.max(1,Math.floor((atk-20)/4)+1)).padStart(2,'0');$('atk').textContent=atk;$('relics').textContent=relics;$('kills').textContent=kills;$('bossName').textContent=boss?boss.name:'AUCUN SIGNAL';$('bossHpText').textContent=boss?Math.ceil(boss.hp)+' / '+boss.max:'—';$('bossBar').style.width=boss?clamp(boss.hp/boss.max*100,0,100)+'%':'0%'}
 function burst(x,y,color,n=8){for(let i=0;i<n;i++)particles.push({x,y,vx:rand(-150,150),vy:rand(-210,80),life:rand(.2,.65),max:.65,color,size:rand(2,5)})}
 function gainXP(n){xp+=n;while(xp>=xpNeed){xp-=xpNeed;xpNeed=Math.floor(xpNeed*1.35+9);atk+=4;maxHp+=10;hp=Math.min(maxHp,hp+24);sound(500,.15,'triangle',.05,500);log('NIVEAU SUPÉRIEUR — attaque +4, intégrité restaurée.')}updateUI()}
